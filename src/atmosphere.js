@@ -35,8 +35,6 @@ export default class Atmosphere {
         }
     }
 
-    
-
     setEventListeners() {
         this.atmosphereItem.forEach(item => {
             item.addEventListener('click', this.openAtmosphere.bind(this))
