@@ -1,3 +1,3 @@
 import Atmosphere from './atmosphere';
 
-new Atmosphere
+new Atmosphere();

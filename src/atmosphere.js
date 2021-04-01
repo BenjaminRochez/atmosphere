@@ -16,22 +16,28 @@ export default class Atmosphere {
             let clonedAtmosphere = event.target.cloneNode();
             clonedAtmosphere.classList.add('atmosphere__clone');
             clonedAtmosphere.className = "";
-            clonedAtmosphere.style.cssText = "display: block; position: fixed; z-index: 9999; max-width: 80%; max-height: 80%; height: auto; top: 50%; left: 50%; transform: translate3d(-50%, -50%, 0); opacity: 0; transition: all 0.3s ease-out;";
+            clonedAtmosphere.style.cssText = "opacity: 0; transition: all 0.3s ease-out; object-fit: contain; height: 100%; width: 100%;";
+
+
+            let containerAtmosphere = document.createElement("div");
+            containerAtmosphere.style.cssText = "display: block; position: fixed; z-index: 9999; width: 80vw; height: 80vh; top: 10%; left: 10%; text-align: center;"
+            containerAtmosphere.appendChild(clonedAtmosphere);
+        
 
             let backdropAtmosphere = document.createElement("div");
             backdropAtmosphere.style.cssText = "display: block; position: fixed; z-index: 9998; width: 100vw; height: 100%; top: 0; left: 0; background: rgba(0,0,0,0.5); opacity: 0;  transition: all 0.3s ease-out; cursor: pointer;";
 
             backdropAtmosphere.addEventListener('click', function(){
                 backdropAtmosphere.remove();
-                clonedAtmosphere.remove();
+                containerAtmosphere.remove();
                 this.atmosphereItem.forEach(item =>{
                     if(item.classList.contains('atmosphere--opened')){
                         item.classList.remove('atmosphere--opened');
                     }
                 });
             }.bind(this));
-            document.body.appendChild(clonedAtmosphere);
-            document.body.insertBefore(backdropAtmosphere, clonedAtmosphere);
+            document.body.appendChild(containerAtmosphere);
+            document.body.insertBefore(backdropAtmosphere, containerAtmosphere);
 
             setTimeout(()=>{
                     clonedAtmosphere.style.opacity = "1";
@@ -46,4 +52,4 @@ export default class Atmosphere {
             item.addEventListener('click', this.openAtmosphere.bind(this))
         });
     }
-}  
+}   
