@@ -16,10 +16,10 @@ export default class Atmosphere {
             let clonedAtmosphere = event.target.cloneNode();
             clonedAtmosphere.classList.add('atmosphere__clone');
             clonedAtmosphere.className = "";
-            clonedAtmosphere.style.cssText = "display: block; position: fixed; z-index: 9999; max-width: 80%; max-height: 80%; height: auto; top: 50%; left: 50%; transform: translate3d(-50%, -50%, 0);";
+            clonedAtmosphere.style.cssText = "display: block; position: fixed; z-index: 9999; max-width: 80%; max-height: 80%; height: auto; top: 50%; left: 50%; transform: translate3d(-50%, -50%, 0); opacity: 0; transition: all 0.3s ease-out;";
 
             let backdropAtmosphere = document.createElement("div");
-            backdropAtmosphere.style.cssText = "display: block; position: fixed; z-index: 9998; width: 100vw; height: 100%; top: 0; left: 0; background: rgba(0,0,0,0.5);";
+            backdropAtmosphere.style.cssText = "display: block; position: fixed; z-index: 9998; width: 100vw; height: 100%; top: 0; left: 0; background: rgba(0,0,0,0.5); opacity: 0;  transition: all 0.3s ease-out; cursor: pointer;";
 
             backdropAtmosphere.addEventListener('click', function(){
                 backdropAtmosphere.remove();
@@ -32,6 +32,12 @@ export default class Atmosphere {
             }.bind(this));
             document.body.appendChild(clonedAtmosphere);
             document.body.insertBefore(backdropAtmosphere, clonedAtmosphere);
+
+            setTimeout(()=>{
+                    clonedAtmosphere.style.opacity = "1";
+                    backdropAtmosphere.style.opacity = "1";
+                }, 50
+            );
         }
     }
 
